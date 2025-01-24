@@ -1,0 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap');
+
+.title {
+    font-family: 'Orbitron', sans-serif;  /* Use the correct font family */
+    font-optical-sizing: auto;
+    font-weight: 700;  /* Change this to 700 or 400 for better results */
+    font-style: normal;
+}
