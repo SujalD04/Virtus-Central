@@ -1,11 +1,14 @@
 import React from "react";
+import Navbar from "./components/Navbar"; 
+import ShootingStars from './components/ui/shooting-stars';
+import Stars from './components/ui/stars-background';
 
 function App() {
   return (
-    <div className="min-h-screen bg-black text-white flex items-center justify-center">
-      <h1 className="text-4xl font-bold">
-        Welcome to Virtus Central! Tailwind is working!
-      </h1>
+    <div className="relative min-h-screen">
+      <Navbar />
+      <ShootingStars />
+      <Stars />
     </div>
   );
 }
