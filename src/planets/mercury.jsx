@@ -19,8 +19,16 @@ const Mercury = ({ highlight, onClick, onPointerOver, onPointerOut }) => {
       scale={[0.15, 0.15, 0.15]} // Scale the planet
       position={[-5.1, 0, 0]} // Position in the solar system
       onClick={onClick} // Handle click event
-      onPointerOver={onPointerOver} // Handle hover event
-      onPointerOut={onPointerOut} // Handle hover out event
+      onPointerOver={(e) => {
+        e.stopPropagation();
+        document.body.style.cursor = 'pointer'; // Change cursor to pointer when hovering over Mercury
+        onPointerOver && onPointerOver(e);
+      }}
+      onPointerOut={(e) => {
+        e.stopPropagation();
+        document.body.style.cursor = 'auto'; // Reset cursor when not hovering over Mercury
+        onPointerOut && onPointerOut(e);
+      }}
     >
       <sphereGeometry args={[1, 32, 32]} />
       <meshStandardMaterial

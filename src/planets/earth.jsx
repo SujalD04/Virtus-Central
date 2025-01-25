@@ -30,8 +30,16 @@ const Earth = ({ highlight, onClick, onPointerOver, onPointerOut }) => {
       scale={[0.25, 0.25, 0.25]} // Scale the planet
       position={[-2.6, 0, 0]} // Position of Earth in the solar system
       onClick={onClick} // Handle click event
-      onPointerOver={onPointerOver} // Handle hover event
-      onPointerOut={onPointerOut} // Handle hover out event
+      onPointerOver={(e) => {
+        e.stopPropagation();
+        onPointerOver && onPointerOver();
+        document.body.style.cursor = "pointer"; // Change cursor to pointer
+      }} // Handle hover event
+      onPointerOut={(e) => {
+        e.stopPropagation();
+        onPointerOut && onPointerOut();
+        document.body.style.cursor = "default"; // Reset cursor when mouse leaves
+      }} // Handle hover out event
     >
       <sphereGeometry args={[1, 32, 32]} />
       <meshStandardMaterial

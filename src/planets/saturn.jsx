@@ -46,10 +46,18 @@ const Saturn = ({ highlight, onClick, onPointerOver, onPointerOut }) => {
       <mesh
         ref={saturnRef}
         scale={[0.55, 0.55, 0.55]}
-        position={[2.1, 0, 0]}
+        position={[2.3, 0, 0]}
         onClick={onClick}
-        onPointerOver={onPointerOver}
-        onPointerOut={onPointerOut}
+        onPointerOver={(e) => {
+          e.stopPropagation(); // Prevent event propagation to other objects
+          onPointerOver && onPointerOver();
+          document.body.style.cursor = "pointer"; // Change cursor to pointer
+        }}
+        onPointerOut={(e) => {
+          e.stopPropagation(); // Prevent event propagation to other objects
+          onPointerOut && onPointerOut();
+          document.body.style.cursor = "default"; // Reset cursor when mouse leaves
+        }}
       >
         <sphereGeometry args={[1, 32, 32]} />
         <meshStandardMaterial
@@ -63,10 +71,18 @@ const Saturn = ({ highlight, onClick, onPointerOver, onPointerOut }) => {
       <mesh
         ref={ringRef}
         scale={[0.28, 0.35, 0.28]}
-        position={[2.09, 0, 0]}
+        position={[2.3, 0, 0]}
         onClick={onClick}
-        onPointerOver={onPointerOver}
-        onPointerOut={onPointerOut}
+        onPointerOver={(e) => {
+          e.stopPropagation(); // Prevent event propagation to other objects
+          onPointerOver && onPointerOver();
+          document.body.style.cursor = "pointer"; // Change cursor to pointer
+        }}
+        onPointerOut={(e) => {
+          e.stopPropagation(); // Prevent event propagation to other objects
+          onPointerOut && onPointerOut();
+          document.body.style.cursor = "default"; // Reset cursor when mouse leaves
+        }}
       >
         <ringGeometry args={[2, 3, 64]} />
         <meshStandardMaterial

@@ -29,8 +29,16 @@ const Venus = ({ highlight, onClick, onPointerOver, onPointerOut }) => {
       scale={[0.25, 0.25, 0.25]} 
       position={[-3.9, 0, 0]} 
       onClick={onClick}
-      onPointerOver={onPointerOver}
-      onPointerOut={onPointerOut}
+      onPointerOver={(e) => {
+        e.stopPropagation();
+        document.body.style.cursor = 'pointer'; // Change cursor to pointer when hovering over Venus
+        onPointerOver && onPointerOver(e);
+      }}
+      onPointerOut={(e) => {
+        e.stopPropagation();
+        document.body.style.cursor = 'auto'; // Reset cursor when not hovering over Venus
+        onPointerOut && onPointerOut(e);
+      }}
     >
       <sphereGeometry args={[1, 32, 32]} />
       <meshStandardMaterial 

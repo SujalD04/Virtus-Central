@@ -25,13 +25,21 @@ const Uranus = ({ highlight, onClick, onPointerOver, onPointerOut }) => {
 
   return (
     <mesh
-      ref={uranusRef}
-      scale={[0.5, 0.5, 0.5]}
-      position={[4.3, 0, 0]}
-      onClick={onClick}
-      onPointerOver={onPointerOver}
-      onPointerOut={onPointerOut}
-    >
+    ref={uranusRef}
+    scale={[0.5, 0.5, 0.5]}
+    position={[4.3, 0, 0]}
+    onClick={onClick}
+    onPointerOver={(e) => {
+      e.stopPropagation(); // Prevent event propagation to other objects
+      onPointerOver && onPointerOver();
+      document.body.style.cursor = "pointer"; // Change cursor to pointer
+    }}
+    onPointerOut={(e) => {
+      e.stopPropagation();
+      onPointerOut && onPointerOut();
+      document.body.style.cursor = "default"; // Reset cursor when mouse leaves
+    }}
+  >
       <sphereGeometry args={[1, 32, 32]} />
       <meshStandardMaterial
         map={texture}
