@@ -88,6 +88,7 @@ const Saturn = ({ highlight, onClick, onPointerOver, onPointerOut }) => {
         <meshStandardMaterial
           map={ringTexture}
           transparent
+          side={THREE.DoubleSide}
           emissive={ringEmissiveColor}
           emissiveIntensity={highlight ? 0.1 : 0.02} // Increase emissive intensity on hover
         />
