@@ -16,7 +16,7 @@ const Sun = () => {
     }
   });
 
-  const sunPosition = [-viewport.width / 2.35, 0, 0]; // Adjust the position to fit the viewport
+  const sunPosition = [-6.7, 0, 0]; // Adjust the position to fit the viewport
 
   return (
     <mesh ref={sunRef} scale={[0.6, 0.9, 0.6]} position={sunPosition}>

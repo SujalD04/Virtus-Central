@@ -11,11 +11,12 @@ const Neptune = () => {
   // Rotate Neptune while keeping the axial tilt
   useFrame(() => {
     if (neptuneRef.current) {
+        neptuneRef.current.rotation.y += 0.01;
     }
   });
 
   return (
-    <mesh ref={neptuneRef} scale={[0.3, 0.6, 0.45]} position={[6, 0, 0]}>
+    <mesh ref={neptuneRef} scale={[0.4, 0.6, 0.4]} position={[6, 0, 0]}>
       <sphereGeometry args={[1, 32, 32]} />
       <meshStandardMaterial map={texture} />
     </mesh>

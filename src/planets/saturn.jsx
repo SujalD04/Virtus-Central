@@ -15,6 +15,7 @@ const Saturn = () => {
     if (saturnRef.current) {
       // Apply axial tilt and rotation around Y-axis for left-right rotation
       saturnRef.current.rotation.set(0.1, saturnRef.current.rotation.y + 0.002, 0.1);
+      saturnRef.current.rotation.y += 0.01;
       saturnRef.current.rotation.y = 1.8;
       saturnRef.current.rotation.x = -0.9;
       saturnRef.current.rotation.z = 1.4;
