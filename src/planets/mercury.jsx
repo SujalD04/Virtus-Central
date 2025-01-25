@@ -18,7 +18,12 @@ const Mercury = () => {
   return (
     <mesh ref={mercuryRef} scale={[0.15, 0.2, 0.15]} position={[-5.1, 0, 0]}>
       <sphereGeometry args={[1, 32, 32]} />
-      <meshStandardMaterial map={texture} />
+      <meshStandardMaterial 
+      map={texture} 
+      emissive={new THREE.Color(0xffffff)} //Emits a white light
+      emissiveIntensity={0.03}
+      
+      />
     </mesh>
   );
 };

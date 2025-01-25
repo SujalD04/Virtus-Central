@@ -19,7 +19,11 @@ const Earth = () => {
   return (
     <mesh ref={earthRef} scale={[0.25, 0.27, 0.25]} position={[-2.6, 0, 0]}>
       <sphereGeometry args={[1, 32, 32]} />
-      <meshStandardMaterial map={texture} />
+      <meshStandardMaterial 
+      map={texture}
+      emissive={new THREE.Color(0xffffff)}
+      emissiveIntensity={0.012}
+       />
     </mesh>
   );
 };
