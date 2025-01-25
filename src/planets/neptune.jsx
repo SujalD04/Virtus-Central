@@ -16,7 +16,7 @@ const Neptune = () => {
   });
 
   return (
-    <mesh ref={neptuneRef} scale={[0.4, 0.6, 0.4]} position={[6, 0, 0]}>
+    <mesh ref={neptuneRef} scale={[0.45, 0.47, 0.45]} position={[6, 0, 0]}>
       <sphereGeometry args={[1, 32, 32]} />
       <meshStandardMaterial map={texture} />
     </mesh>

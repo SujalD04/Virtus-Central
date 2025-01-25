@@ -8,6 +8,7 @@ import Jupiter from '../planets/jupiter';
 import Saturn from '../planets/saturn';
 import Uranus from '../planets/uranus';
 import Neptune from '../planets/neptune';
+
 const SolarSystem = () => {
   return (
     <React.Fragment> {/* Or use a <group> tag in the scene */}
