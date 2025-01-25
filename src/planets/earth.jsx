@@ -5,7 +5,6 @@ import * as THREE from "three";
 const Earth = () => {
   const earthRef = useRef();
 
-  // Load Earth's texture (optional)
   const texture = useLoader(THREE.TextureLoader, 'earth.jpg'); // Replace with your texture
 
   // Rotate Earth on its axis and orbit around the Sun

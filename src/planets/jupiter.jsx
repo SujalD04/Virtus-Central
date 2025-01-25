@@ -5,7 +5,6 @@ import * as THREE from "three";
 const Jupiter = () => {
   const jupiterRef = useRef();
 
-  // Load Jupiter's texture (optional)
   const texture = useLoader(THREE.TextureLoader, 'jupiter.jpg'); 
 
   // Rotate Jupiter on its axis and orbit around the Sun

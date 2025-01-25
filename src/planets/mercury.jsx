@@ -5,7 +5,6 @@ import * as THREE from "three";
 const Mercury = () => {
   const mercuryRef = useRef();
 
-  // Load Mercury's texture (optional)
   const texture = useLoader(THREE.TextureLoader, 'mercury.jpg');
 
   // Rotate Mercury on its axis

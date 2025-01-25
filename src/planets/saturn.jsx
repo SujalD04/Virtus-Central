@@ -6,7 +6,6 @@ const Saturn = () => {
   const saturnRef = useRef();
   const ringRef = useRef();
 
-  // Load Saturn's texture
   const texture = useLoader(THREE.TextureLoader, 'saturn.jpg');
   const ringTexture = useLoader(THREE.TextureLoader, 'saturn_ring.jpg');
 

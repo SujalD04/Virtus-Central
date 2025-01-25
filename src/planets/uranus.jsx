@@ -5,7 +5,6 @@ import * as THREE from "three";
 const Uranus = () => {
   const uranusRef = useRef();
 
-  // Load Uranus' texture
   const texture = useLoader(THREE.TextureLoader, 'uranus.jpg');
 
   // Rotate Uranus while keeping the axial tilt

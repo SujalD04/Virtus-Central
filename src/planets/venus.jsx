@@ -4,8 +4,6 @@ import * as THREE from "three";
 
 const Venus = () => {
   const venusRef = useRef();
-
-  // Load Venus's texture (optional)
   const texture = useLoader(THREE.TextureLoader, 'venus.jpg');
 
   // Rotate Venus on its axis and orbit around the Sun

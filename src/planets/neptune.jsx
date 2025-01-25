@@ -5,7 +5,6 @@ import * as THREE from "three";
 const Neptune = () => {
   const neptuneRef = useRef();
 
-  // Load Neptune's texture
   const texture = useLoader(THREE.TextureLoader, 'neptune.jpg');
 
   // Rotate Neptune while keeping the axial tilt
