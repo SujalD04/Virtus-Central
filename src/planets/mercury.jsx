@@ -16,7 +16,7 @@ const Mercury = () => {
   });
 
   return (
-    <mesh ref={mercuryRef} scale={[0.2, 0.28, 0.2]} position={[-5, 0, 0]}>
+    <mesh ref={mercuryRef} scale={[0.15, 0.2, 0.15]} position={[-5.1, 0, 0]}>
       <sphereGeometry args={[1, 32, 32]} />
       <meshStandardMaterial map={texture} />
     </mesh>
