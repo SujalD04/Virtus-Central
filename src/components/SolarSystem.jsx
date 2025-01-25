@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom"; // Import useNavigate hook
 import { Html } from "@react-three/drei"; // To display HTML above the planet
 import Sun from "../planets/sun";
 import Mercury from "../planets/mercury";
@@ -16,6 +17,7 @@ const SolarSystem = () => {
   const [selectedPlanet, setSelectedPlanet] = useState(null);
   // State to track which planet is being hovered
   const [hoveredPlanet, setHoveredPlanet] = useState(null);
+  const navigate = useNavigate(); // Initialize the navigate function
 
   // Planet information to display when hovered
   const planetInfo = {
@@ -31,6 +33,7 @@ const SolarSystem = () => {
 
   const handlePlanetClick = (planetName) => {
     setSelectedPlanet(planetName); // Update the selected planet
+    navigate(`/${planetName}Page`); // Navigate to the respective planet page
   };
 
   const handlePlanetHover = (planetName) => {
