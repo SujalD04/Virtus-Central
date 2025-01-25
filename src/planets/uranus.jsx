@@ -1,9 +1,10 @@
-import React, { useRef } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { useFrame, useLoader } from "@react-three/fiber";
 import * as THREE from "three";
 
-const Uranus = () => {
+const Uranus = ({ highlight, onClick, onPointerOver, onPointerOut }) => {
   const uranusRef = useRef();
+  const [emissiveColor, setEmissiveColor] = useState(new THREE.Color(0x000000)); // Default emissive color
 
   const texture = useLoader(THREE.TextureLoader, 'uranus.jpg');
 
@@ -14,10 +15,29 @@ const Uranus = () => {
     }
   });
 
+  useEffect(() => {
+    if (highlight) {
+      setEmissiveColor(new THREE.Color(0xffffff)); // White glow when highlighted
+    } else {
+      setEmissiveColor(new THREE.Color(0x000000)); // No glow when not highlighted
+    }
+  }, [highlight]);
+
   return (
-    <mesh ref={uranusRef} scale={[0.5, 0.6, 0.5]} position={[4.3, 0, 0]}>
+    <mesh
+      ref={uranusRef}
+      scale={[0.5, 0.5, 0.5]}
+      position={[4.3, 0, 0]}
+      onClick={onClick}
+      onPointerOver={onPointerOver}
+      onPointerOut={onPointerOut}
+    >
       <sphereGeometry args={[1, 32, 32]} />
-      <meshStandardMaterial map={texture} />
+      <meshStandardMaterial
+        map={texture}
+        emissive={emissiveColor}
+        emissiveIntensity={highlight ? 0.1 : 0.02}
+      />
     </mesh>
   );
 };

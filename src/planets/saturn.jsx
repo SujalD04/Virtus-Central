@@ -1,18 +1,30 @@
-import React, { useRef } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { useFrame, useLoader } from "@react-three/fiber";
 import * as THREE from "three";
 
-const Saturn = () => {
+const Saturn = ({ highlight, onClick, onPointerOver, onPointerOut }) => {
   const saturnRef = useRef();
   const ringRef = useRef();
 
   const texture = useLoader(THREE.TextureLoader, 'saturn.jpg');
   const ringTexture = useLoader(THREE.TextureLoader, 'saturn_ring.jpg');
 
-  // Rotate Saturn left to right while keeping the axial tilt
+  const [planetEmissiveColor, setPlanetEmissiveColor] = useState(new THREE.Color(0x000000)); // Default emissive color for planet
+  const [ringEmissiveColor, setRingEmissiveColor] = useState(new THREE.Color(0x000000)); // Default emissive color for rings
+
+  useEffect(() => {
+    if (highlight) {
+      setPlanetEmissiveColor(new THREE.Color(0xffffff)); // Set white glow for planet when highlighted
+      setRingEmissiveColor(new THREE.Color(0xffffff)); // Set white glow for rings when highlighted
+    } else {
+      setPlanetEmissiveColor(new THREE.Color(0x000000)); // No glow for planet when not highlighted
+      setRingEmissiveColor(new THREE.Color(0x000000)); // No glow for rings when not highlighted
+    }
+  }, [highlight]); // Run when the highlight state changes
+
+  // Rotate Saturn and its rings
   useFrame(() => {
     if (saturnRef.current) {
-      // Apply axial tilt and rotation around Y-axis for left-right rotation
       saturnRef.current.rotation.set(0.1, saturnRef.current.rotation.y + 0.002, 0.1);
       saturnRef.current.rotation.y += 0.01;
       saturnRef.current.rotation.y = 1.8;
@@ -21,9 +33,8 @@ const Saturn = () => {
     }
 
     if (ringRef.current) {
-      // Orbiting the rings around Saturn
       ringRef.current.rotation.y += 0.1;
-      ringRef.current.rotation.y = -0.7; // Orbiting around the Y-axis of Saturn (hula hoop style)
+      ringRef.current.rotation.y = -0.7;
       ringRef.current.rotation.z = -1;
       ringRef.current.rotation.x = 1.4;
     }
@@ -31,16 +42,39 @@ const Saturn = () => {
 
   return (
     <group>
-      {/* Saturn */}
-      <mesh ref={saturnRef} scale={[0.55, 0.58, 0.55]} position={[2.1, 0, 0]}>
+      {/* Saturn Planet */}
+      <mesh
+        ref={saturnRef}
+        scale={[0.55, 0.55, 0.55]}
+        position={[2.1, 0, 0]}
+        onClick={onClick}
+        onPointerOver={onPointerOver}
+        onPointerOut={onPointerOut}
+      >
         <sphereGeometry args={[1, 32, 32]} />
-        <meshStandardMaterial map={texture} />
+        <meshStandardMaterial
+          map={texture}
+          emissive={planetEmissiveColor}
+          emissiveIntensity={highlight ? 0.1 : 0.02} // Increase emissive intensity on hover
+        />
       </mesh>
 
-      {/* Saturn's Rings */}
-      <mesh ref={ringRef} scale={[0.28, 0.35, 0.28]} position={[2.09, 0, 0]}>
-        <ringGeometry args={[2, 3, 64]} />  {/* Wider, more detailed ring */}
-        <meshStandardMaterial map={ringTexture} transparent />
+      {/* Saturn Rings */}
+      <mesh
+        ref={ringRef}
+        scale={[0.28, 0.35, 0.28]}
+        position={[2.09, 0, 0]}
+        onClick={onClick}
+        onPointerOver={onPointerOver}
+        onPointerOut={onPointerOut}
+      >
+        <ringGeometry args={[2, 3, 64]} />
+        <meshStandardMaterial
+          map={ringTexture}
+          transparent
+          emissive={ringEmissiveColor}
+          emissiveIntensity={highlight ? 0.1 : 0.02} // Increase emissive intensity on hover
+        />
       </mesh>
     </group>
   );
