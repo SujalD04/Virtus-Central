@@ -40,12 +40,12 @@ const MercuryPage = () => {
   };
 
   return (
-    <div className="mercury-page" style={{ display: "flex" }}>
+    <div className="mercury-page" style={{ display: "flex", flexDirection: "row", height: "100vh" }}>
       {/* Left side: 3D Mercury model inside Canvas */}
       <div
         className="planet-3d"
         style={{
-          width: "50%",
+          flex: 1,
           height: "100vh",
           background: "#000",
           pointerEvents: "none", // Prevent cursor change on the background div
@@ -64,7 +64,7 @@ const MercuryPage = () => {
       <div
         className="server-info"
         style={{
-          width: "50%",
+          flex: 1,
           padding: "20px",
           display: "flex",
           justifyContent: "center",
@@ -85,6 +85,25 @@ const MercuryPage = () => {
           <h1 className="text-lg">Welcome to Virtus Central!</h1>
         </div>
       </div>
+
+      {/* Mobile responsiveness */}
+      <style>
+        {`
+          @media (max-width: 768px) {
+            .mercury-page {
+              flex-direction: column; /* Stack the elements vertically */
+            }
+            .planet-3d {
+              display: none; /* Hide the 3D model on smaller screens */
+            }
+            .server-info {
+              width: 100%; /* Info area takes up the full width */
+              padding: 20px;
+              height: 100vh; /* Full height on mobile */
+            }
+          }
+        `}
+      </style>
     </div>
   );
 };
