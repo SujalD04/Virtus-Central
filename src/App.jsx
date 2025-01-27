@@ -1,12 +1,12 @@
 import React, { useRef, useState, useEffect } from "react";
 import { Canvas } from "@react-three/fiber";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom"; // Import Router components
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import { useFrame, useThree } from "@react-three/fiber";
 import ShootingStars from "./components/ui/shooting-stars";
 import Stars from "./components/ui/stars-background";
 import SolarSystem from "./components/SolarSystem";
-import MercuryPage from "./pages/MercuryPage";  // Import each planet page
+import MercuryPage from "./pages/MercuryPage";
 import VenusPage from "./pages/VenusPage";
 import EarthPage from "./pages/EarthPage";
 import MarsPage from "./pages/MarsPage";
@@ -17,6 +17,7 @@ import NeptunePage from "./pages/NeptunePage";
 import "../src/App.css";
 import * as THREE from "three";
 
+// FreeFlyCamera component for navigation
 const FreeFlyCamera = () => {
   const { camera } = useThree();
   const speed = 0.04;
@@ -24,6 +25,11 @@ const FreeFlyCamera = () => {
   const keysPressed = useRef({});
   const mouseDelta = useRef({ x: 0, y: 0 });
   const isMousePressed = useRef(false);
+
+   // Set the initial camera position here
+   useEffect(() => {
+    camera.position.set(0, 0, 6); 
+   }, [camera]);
 
   const handleKeyDown = (event) => {
     keysPressed.current[event.code] = true;
@@ -136,13 +142,31 @@ const App = () => {
         <ShootingStars />
         <Stars />
 
-        {/* Solar System Canvas */}
-        <Canvas style={{ position: "absolute", top: 0, left: 0, zIndex: 0 }}>
-          <ambientLight intensity={0.5} />
-          <pointLight position={[10, 10, 10]} intensity={1} />
-          <SolarSystem />
-          <FreeFlyCamera />
-        </Canvas>
+        {/* Routes for Planet Pages */}
+        <Routes>
+          {/* Main Solar System Canvas */}
+          <Route
+            path="/"
+            element={
+              <Canvas style={{ position: "absolute", top: 0, left: 0, zIndex: 0 }}>
+                <ambientLight intensity={0.5} />
+                <pointLight position={[10, 10, 10]} intensity={1} />
+                <SolarSystem />
+                <FreeFlyCamera />
+              </Canvas>
+            }
+          />
+
+          {/* Planet-specific pages */}
+          <Route path="/MercuryPage" element={<MercuryPage />} />
+          <Route path="/VenusPage" element={<VenusPage />} />
+          <Route path="/EarthPage" element={<EarthPage />} />
+          <Route path="/MarsPage" element={<MarsPage />} />
+          <Route path="/JupiterPage" element={<JupiterPage />} />
+          <Route path="/SaturnPage" element={<SaturnPage />} />
+          <Route path="/UranusPage" element={<UranusPage />} />
+          <Route path="/NeptunePage" element={<NeptunePage />} />
+        </Routes>
 
         {/* Background Music */}
         <audio ref={audioRef} loop muted={!isAudioPlaying}>
@@ -157,18 +181,6 @@ const App = () => {
             {isAudioPlaying ? "Pause Music" : "Play Music"}
           </button>
         </div>
-
-        {/* Routes for each planet */}
-        <Routes>
-          <Route path="/MercuryPage" element={<MercuryPage />} />
-          <Route path="/VenusPage" element={<VenusPage />} />
-          <Route path="/EarthPage" element={<EarthPage />} />
-          <Route path="/MarsPage" element={<MarsPage />} />
-          <Route path="/JupiterPage" element={<JupiterPage />} />
-          <Route path="/SaturnPage" element={<SaturnPage />} />
-          <Route path="/UranusPage" element={<UranusPage />} />
-          <Route path="/NeptunePage" element={<NeptunePage />} />
-        </Routes>
       </div>
     </Router>
   );
