@@ -23,7 +23,7 @@ const Navbar = () => {
       {/* Right side: Dropdown Menu */}
       <div className="relative">
         <button 
-          className="text-white bg-transparent border border-white py-2 px-4 rounded-lg focus:outline-none"
+          className="text-white bg-transparent border border-white py-2 px-4 rounded-lg focus:outline-none planet-button"
           onClick={toggleDropdown}  // Toggle dropdown on click
         >
           Planets

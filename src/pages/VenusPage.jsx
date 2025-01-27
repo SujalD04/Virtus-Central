@@ -78,7 +78,21 @@ const VenusPage = () => {
             boxShadow: "0 4px 6px rgba(0, 0, 0, 0.3)",
           }}
         >
-          <h1>Welcome to Virtus Central</h1>
+          <h1>About The Server</h1>
+          <hr/>
+          <p className="text-sm">
+          Founded by 2 guys, Virtus Central is a dynamic hub for enthusiasts of all kinds, where gamers, techies, and media lovers unite to explore a wide range of interests.
+          Whether you're into the latest video games, cutting-edge technology, or diving into movies, anime, coding, books, art, and sports, there's a place for you here.
+          Our community thrives on collaboration and creativity, offering opportunities to engage in game nights, tech talks, anime discussions, coding sessions, 
+          book clubs, art showcases, and even sports chats. With an inclusive and friendly environment, you can connect with like-minded individuals, share your passions, and be 
+          part of a diverse group that celebrates everything from gaming to culture and beyond.
+          <br/>
+          <br/>
+          At Virtus Central, we believe in fostering a welcoming atmosphere where everyone can feel at home. Whether you're a seasoned gamer strategizing your next move, 
+          a tech enthusiast eager to discuss the latest innovations, a movie buff sharing your favorite film theories, or an artist showcasing your latest creation, this is 
+          the place for you. Our diverse channels and activities cater to a wide range of interests, allowing you to dive into meaningful conversations, participate in engaging 
+          events, and learn from others.
+          </p>
         </div>
       </div>
     </div>

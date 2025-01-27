@@ -2,6 +2,7 @@ import React, { useRef } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { useLoader } from "@react-three/fiber";
 import * as THREE from "three";
+import '../pages/EarthPage.css'
 
 const Earth = ({ texture }) => {
   const earthRef = useRef();
@@ -31,13 +32,9 @@ const Earth = ({ texture }) => {
 
 const EarthPage = () => {
   const texture = useLoader(THREE.TextureLoader, 'earth.jpg');
-  
-  const handleClick = () => {
-    console.log("Earth clicked!");
-  };
 
   return (
-    <div className="earth-page" style={{ display: "flex" }}>
+    <div className="earth-page" style={{ display: "flex", height: "100vh" }}>
       {/* Left side: 3D Earth model inside Canvas */}
       <div
         className="planet-3d"
@@ -45,7 +42,7 @@ const EarthPage = () => {
           width: "50%",
           height: "100vh",
           background: "#000",
-          pointerEvents: "none",
+          pointerEvents: "none", // Prevent interaction with the 3D canvas
         }}
       >
         <Canvas style={{ width: "100%", height: "100%" }}>
@@ -78,7 +75,11 @@ const EarthPage = () => {
             boxShadow: "0 4px 6px rgba(0, 0, 0, 0.3)",
           }}
         >
-          <h1>Welcome to Virtus Central</h1>
+          <h1>Here's the server link, feel free to check it out.</h1>
+          {/* Traditional anchor tag wrapping the button */}
+          <a href="https://discord.gg/t9ZfdPz5jJ" target="_blank" rel="noopener noreferrer">
+            <button>Click me!</button>
+          </a>
         </div>
       </div>
     </div>

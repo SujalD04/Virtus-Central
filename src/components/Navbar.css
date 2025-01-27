@@ -42,8 +42,24 @@
     color: #fff;
   }
   
-  /* No need for hover state in this case, we'll handle visibility via React state */
-  
-  
+  .planet-button {
+    border: 2px solid white; /* Add a white border */
+    padding: 10px 20px; /* Optional: Add padding to make the button more clickable */
+    border-radius: 8px; /* Optional: Add rounded corners */
+    background-color: transparent; /* Keep background transparent */
+    color: white; /* Make the text white */
+    font-weight: 700; /* Optional: Make the font bold */
+    text-transform: uppercase; /* Optional: Make text uppercase */
+    cursor: pointer; /* Change cursor to pointer to indicate it's clickable */
+    transition: all 0.3s ease; /* Smooth transition for hover effect */
+}
+
+/* Add hover effect for the planet button */
+.planet-button:hover {
+    background-color: #206ec8; /* Change background on hover */
+    border-color: #ddd; /* Lighten the border color on hover */
+    color: #fff; /* Keep text color white on hover */
+}
+
   
   

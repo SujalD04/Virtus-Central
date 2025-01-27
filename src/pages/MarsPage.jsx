@@ -31,13 +31,9 @@ const Mars = ({ texture }) => {
 
 const MarsPage = () => {
   const texture = useLoader(THREE.TextureLoader, 'mars.jpg');
-  
-  const handleClick = () => {
-    console.log("Mars clicked!");
-  };
 
   return (
-    <div className="mars-page" style={{ display: "flex" }}>
+    <div className="mars-page" style={{ display: "flex", height: "100vh" }}>
       {/* Left side: 3D Mars model inside Canvas */}
       <div
         className="planet-3d"
@@ -45,13 +41,12 @@ const MarsPage = () => {
           width: "50%",
           height: "100vh",
           background: "#000",
-          pointerEvents: "none",
+          pointerEvents: "none", // Prevent interaction with the 3D canvas
         }}
       >
         <Canvas style={{ width: "100%", height: "100%" }}>
           <ambientLight intensity={0.5} />
           <pointLight position={[10, 10, 10]} intensity={1} />
-          
           <Mars texture={texture} />
         </Canvas>
       </div>
@@ -76,9 +71,24 @@ const MarsPage = () => {
             backgroundColor: "#333",
             borderRadius: "8px",
             boxShadow: "0 4px 6px rgba(0, 0, 0, 0.3)",
+            maxHeight: "90vh", // Ensure box is not too tall
+            overflowY: "auto", // Allow scrolling if content overflows
           }}
         >
-          <h1>Welcome to Virtus Central</h1>
+          <h1 className="underline text-2xl mb-4">Rules and Guidelines</h1>
+          <ul className="list-disc list-inside space-y-3 text-left text-sm">
+            <li>Respect All Members: Treat everyone with kindness and respect. Personal attacks, harassment, or hate speech will not be tolerated.</li>
+            <li>No Spamming: Avoid sending repetitive messages, links, or images. Spamming clutters channels and disrupts conversations.</li>
+            <li>Keep Content Safe for Work (SFW): All content must be appropriate for all ages. No NSFW, offensive, or illegal material.</li>
+            <li>No Self-Promotion or Advertising: Do not promote your own content, server, or social media without prior permission from the server moderators.</li>
+            <li>Stay Relevant: Keep discussions relevant to the channel topic. Off-topic conversations should be moved to appropriate channels.</li>
+            <li>No Excessive Pinging: Avoid unnecessarily pinging members, especially moderators or admins, unless it is urgent.</li>
+            <li>Use Appropriate Language: Keep language clean and avoid using excessive profanity. Respect others’ boundaries regarding sensitive topics.</li>
+            <li>No Impersonation: Do not impersonate other members, moderators, or public figures. This includes using similar usernames or profile pictures.</li>
+            <li>Respect Privacy: Do not share personal information about yourself or others. This includes real names, addresses, or private conversations without consent.</li>
+            <li>Follow Discord’s Terms of Service: All server members must adhere to Discord’s Terms of Service and Community Guidelines.</li>
+            <li><a className="text-blue-600" href="https://discord.com/terms">Discord's Terms</a> <a className="text-green-600" href="https://discord.com/guidelines">Discord's Guidelines</a></li>
+          </ul>
         </div>
       </div>
     </div>

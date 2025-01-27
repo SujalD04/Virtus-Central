@@ -1,10 +1,10 @@
-import React, { useRef } from "react";
+import React, { useState, useRef } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { useLoader } from "@react-three/fiber";
 import * as THREE from "three";
+import emailjs from "emailjs-com"; // Import EmailJS
 
 const Uranus = ({ texture }) => {
-  // Reference to Uranus mesh for rotation
   const uranusRef = useRef();
 
   // Rotate the Uranus model in each frame while keeping its position fixed
@@ -31,8 +31,49 @@ const Uranus = ({ texture }) => {
 };
 
 const UranusPage = () => {
-  // Load Uranus' texture
   const texture = useLoader(THREE.TextureLoader, 'uranus.jpg');
+  
+  // State for form inputs
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
+  const [isSending, setIsSending] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState("");
+
+  // Handle form submission with EmailJS
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setIsSending(true);
+    setSubmitStatus("");
+
+    // Prepare the data to send to the template
+    const formData = {
+      from_name: name,
+      from_email: email,
+      message: message,
+    };
+    
+
+    // Send the email using EmailJS
+    emailjs
+      .send("service_7mqvqpz", "template_r6jgt29", formData, "iXFTj6XhKdRBUBkst")
+      .then(
+        (response) => {
+          console.log("Message sent successfully:", response);
+          setSubmitStatus("Message sent successfully!");
+          setIsSending(false);
+          // Clear the form after submission
+          setName("");
+          setEmail("");
+          setMessage("");
+        },
+        (error) => {
+          console.log("Error sending message:", error);
+          setSubmitStatus("Error sending message. Please try again.");
+          setIsSending(false);
+        }
+      );
+  };
 
   return (
     <div className="uranus-page" style={{ display: "flex" }}>
@@ -43,19 +84,17 @@ const UranusPage = () => {
           width: "50%",
           height: "100vh",
           background: "#000",
-          pointerEvents: "none", // Prevent cursor change on the background div
+          pointerEvents: "none",
         }}
       >
         <Canvas style={{ width: "100%", height: "100%" }}>
           <ambientLight intensity={0.5} />
           <pointLight position={[10, 10, 10]} intensity={1} />
-          
-          {/* Pass the texture to the Uranus component */}
           <Uranus texture={texture} />
         </Canvas>
       </div>
 
-      {/* Right side: Welcome box */}
+      {/* Right side: Message Form */}
       <div
         className="server-info"
         style={{
@@ -75,13 +114,65 @@ const UranusPage = () => {
             backgroundColor: "#333",
             borderRadius: "8px",
             boxShadow: "0 4px 6px rgba(0, 0, 0, 0.3)",
+            width: "100%",
+            maxWidth: "500px",
           }}
         >
-          <h1>Welcome to Virtus Central</h1>
+          <h1>Contact Us</h1>
+          <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "15px" }}>
+            <input
+              type="text"
+              placeholder="Your Name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              required
+              style={inputStyle}
+            />
+            <input
+              type="email"
+              placeholder="Your Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+              style={inputStyle}
+            />
+            <textarea
+              placeholder="Your Message"
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
+              required
+              style={{ ...inputStyle, height: "150px", resize: "none" }}
+            />
+            <button type="submit" style={buttonStyle} disabled={isSending}>
+              {isSending ? "Sending..." : "Submit"}
+            </button>
+          </form>
+          {submitStatus && <p style={{ color: "green", marginTop: "20px" }}>{submitStatus}</p>}
         </div>
       </div>
     </div>
   );
+};
+
+// Styling for form elements
+const inputStyle = {
+  padding: "12px",
+  borderRadius: "8px",
+  border: "1px solid #444",
+  backgroundColor: "#222",
+  color: "white",
+  fontSize: "16px",
+  outline: "none",
+};
+
+const buttonStyle = {
+  padding: "12px 20px",
+  backgroundColor: "#4CAF50",
+  color: "white",
+  borderRadius: "8px",
+  border: "none",
+  cursor: "pointer",
+  fontSize: "16px",
 };
 
 export default UranusPage;

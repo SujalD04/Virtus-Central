@@ -1,0 +1,61 @@
+.earth-page {
+    display: flex;
+    height: 100vh;
+  }
+  
+  .planet-3d {
+    width: 50%;
+    height: 100vh;
+    background: #000;
+    pointer-events: none; /* Ensure this only applies to the 3D canvas */
+  }
+  
+  .server-info {
+    width: 50%;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    background-color: #111;
+    position: relative; /* Ensure button is clickable */
+  }
+  
+  .server-info div {
+    text-align: center;
+    padding: 30px;
+    background-color: #333;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  }
+  
+  button {
+    cursor: pointer; /* Ensure the cursor changes to a hand */
+  }
+  
+  a {
+    display: inline-block; /* Ensure it's clickable */
+    pointer-events: all; /* Ensure anchor tags are clickable */
+  }
+
+  button {
+    background-color: #007BFF; /* A blue background */
+    color: white; /* White text color */
+    padding: 12px 24px; /* Padding for better size */
+    border-radius: 8px; /* Rounded corners */
+    font-size: 16px; /* Larger text */
+    font-weight: bold; /* Bold text */
+    cursor: pointer; /* Change cursor to pointer on hover */
+    transition: all 0.3s ease; /* Smooth transition */
+    border: none; /* Remove border */
+  }
+  
+  button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+    transform: scale(1.05); /* Slightly enlarge the button */
+  }
+  
+  button:focus {
+    outline: none; /* Remove focus outline */
+  }
+  

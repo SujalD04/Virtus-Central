@@ -82,7 +82,7 @@ const MercuryPage = () => {
             boxShadow: "0 4px 6px rgba(0, 0, 0, 0.3)",
           }}
         >
-          <h1>Welcome to Virtus Central</h1>
+          <h1>Welcome to Virtus Central!</h1>
         </div>
       </div>
     </div>

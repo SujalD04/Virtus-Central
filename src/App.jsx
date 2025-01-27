@@ -175,7 +175,7 @@ const App = () => {
         </audio>
 
         {/* Artist Credit and Toggle Button */}
-        <div className="absolute bottom-4 right-4 text-white text-sm z-50 song flex flex-col items-center space-y-2">
+        <div className="absolute bottom-4 left-4 text-white text-sm z-50 song flex flex-col items-center space-y-2">
           <p>Music: Hans Zimmer - Interstellar</p>
           <button onClick={handleToggleAudio} className="text-white bg-black p-2 rounded">
             {isAudioPlaying ? "Pause Music" : "Play Music"}

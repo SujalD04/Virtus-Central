@@ -1,0 +1,23 @@
+/* Custom Scrollbar for the roles container */
+.server-info div::-webkit-scrollbar {
+    width: 10px; /* Width of the scrollbar */
+  }
+  
+  .server-info div::-webkit-scrollbar-track {
+    background: #2d2d2d; /* Dark background for the scrollbar track */
+    border-radius: 10px;
+  }
+  
+  .server-info div::-webkit-scrollbar-thumb {
+    background: #4a90e2; /* Color of the scrollbar thumb (the draggable part) */
+    border-radius: 10px;
+  }
+  
+  .server-info div::-webkit-scrollbar-thumb:hover {
+    background: #2a7aff; /* Slightly different color when hovering */
+  }
+  
+  .server-info div::-webkit-scrollbar-corner {
+    background: transparent; /* Remove the scrollbar corner (where two scrollbars meet) */
+  }
+  
