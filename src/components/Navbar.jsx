@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';  // Import Link from react-router-dom for navigation
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import '../components/Navbar.css';
 
 const Navbar = () => {
@@ -7,8 +7,25 @@ const Navbar = () => {
 
   // Toggle dropdown visibility on click
   const toggleDropdown = () => {
-    setDropdownVisible(!dropdownVisible);
+    setDropdownVisible((prev) => !prev);  // Toggle state value
   };
+
+  // Close the dropdown if clicked outside
+  const handleClickOutside = (e) => {
+    // Close dropdown only if clicked outside of the dropdown button or menu
+    if (!e.target.closest('.relative')) {
+      setDropdownVisible(false);
+    }
+  };
+
+  useEffect(() => {
+    // Add event listener to handle click outside
+    document.addEventListener('click', handleClickOutside);
+    return () => {
+      // Cleanup the event listener
+      document.removeEventListener('click', handleClickOutside);
+    };
+  }, [dropdownVisible]);
 
   return (
     <nav className="absolute top-0 left-0 right-0 flex justify-between items-center py-4 px-8 z-10">

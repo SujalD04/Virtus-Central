@@ -28,7 +28,7 @@ const FreeFlyCamera = () => {
 
    // Set the initial camera position here
    useEffect(() => {
-    camera.position.set(0, 0, 6); 
+    camera.position.set(-1, 0, 6); 
    }, [camera]);
 
   const handleKeyDown = (event) => {

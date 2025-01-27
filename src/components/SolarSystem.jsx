@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom"; // Import useNavigate hook
-import { Html } from "@react-three/drei"; // To display HTML above the planet
+import { Html, Text } from "@react-three/drei"; // To display HTML and 3D text above the planet
 import Sun from "../planets/sun";
 import Mercury from "../planets/mercury";
 import Venus from "../planets/venus";
@@ -176,6 +176,17 @@ const SolarSystem = () => {
           </div>
         </Html>
       )}
+
+      {/* 3D Fixed Text */}
+      <Text
+        position={[-0, 4, -5]} // Adjust this position to place the text where you want
+        fontSize={1}
+        color="white"
+        anchorX="center"
+        anchorY="middle"
+      >
+        Use your Mouse and WASD Keys to move around
+      </Text>
     </React.Fragment>
   );
 };
