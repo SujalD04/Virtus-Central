@@ -2,7 +2,7 @@ import React, { useRef, useState, useEffect } from "react";
 import { Canvas } from "@react-three/fiber";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
-import { useFrame, useThree } from "@react-three/fiber";
+import { useFrame, useThree, useLoader } from "@react-three/fiber";
 import ShootingStars from "./components/ui/shooting-stars";
 import Stars from "./components/ui/stars-background";
 import SolarSystem from "./components/SolarSystem";
@@ -17,6 +17,15 @@ import NeptunePage from "./pages/NeptunePage";
 import "../src/App.css";
 import * as THREE from "three";
 
+// Loading animation component
+const LoadingAnimation = () => {
+  return (
+    <div className="absolute inset-0 flex items-center justify-center z-50 bg-black bg-opacity-60">
+      <div className="w-16 h-16 border-4 border-t-4 border-white rounded-full animate-spin"></div>
+    </div>
+  );
+};
+
 // FreeFlyCamera component for navigation
 const FreeFlyCamera = () => {
   const { camera } = useThree();
@@ -26,10 +35,10 @@ const FreeFlyCamera = () => {
   const mouseDelta = useRef({ x: 0, y: 0 });
   const isMousePressed = useRef(false);
 
-   // Set the initial camera position here
-   useEffect(() => {
-    camera.position.set(-1, 0, 6); 
-   }, [camera]);
+  // Set the initial camera position here
+  useEffect(() => {
+    camera.position.set(-1, 0, 6);
+  }, [camera]);
 
   const handleKeyDown = (event) => {
     keysPressed.current[event.code] = true;
@@ -117,6 +126,13 @@ const FreeFlyCamera = () => {
 const App = () => {
   const audioRef = useRef(null);
   const [isAudioPlaying, setIsAudioPlaying] = useState(false);
+  const [isLoading, setIsLoading] = useState(true); // Track loading state
+
+  // Handle loading of assets (example for 3D models)
+  useEffect(() => {
+    const timer = setTimeout(() => setIsLoading(false), 3000); // Simulate 3D model loading time
+    return () => clearTimeout(timer);
+  }, []);
 
   useEffect(() => {
     if (audioRef.current) {
@@ -141,6 +157,9 @@ const App = () => {
         {/* Shooting Stars and Starry Background */}
         <ShootingStars />
         <Stars />
+
+        {/* Show loading animation if the objects are still loading */}
+        {isLoading && <LoadingAnimation />}
 
         {/* Routes for Planet Pages */}
         <Routes>
