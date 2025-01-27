@@ -1,8 +1,49 @@
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap');
 
-.title {
+* {
     font-family: 'Orbitron', sans-serif;  /* Use the correct font family */
     font-optical-sizing: auto;
     font-weight: 700;  /* Change this to 700 or 400 for better results */
     font-style: normal;
 }
+
+/* Navbar dropdown styles */
+.relative:hover .dropdown-content {
+    display: block; /* Show dropdown when the button is hovered */
+  }
+  
+/* Navbar dropdown styles */
+.relative {
+    position: relative;
+  }
+  
+  .dropdown-content {
+    display: none; /* Initially hidden */
+    position: absolute;
+    background-color: #333;
+    color: white;
+    border-radius: 8px;
+    padding: 8px 16px;
+    width: 160px;
+    top: 100%;
+    left: 0;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  }
+  
+  .dropdown-content a {
+    display: block;
+    padding: 8px;
+    text-decoration: none;
+    color: white;
+  }
+  
+  .dropdown-content a:hover {
+    background-color: #444;
+    color: #fff;
+  }
+  
+  /* No need for hover state in this case, we'll handle visibility via React state */
+  
+  
+  
+  
