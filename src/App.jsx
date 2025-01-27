@@ -26,15 +26,14 @@ const LoadingAnimation = () => {
   );
 };
 
-// FreeFlyCamera component for navigation
 const FreeFlyCamera = () => {
   const { camera } = useThree();
   const speed = 0.04;
   const rotationSpeed = 0.002;
   const keysPressed = useRef({});
   const mouseDelta = useRef({ x: 0, y: 0 });
+  const touchStart = useRef({ x: 0, y: 0 }); // Store initial touch position
   const isMousePressed = useRef(false);
-  const touchStart = useRef({ x: 0, y: 0 });
 
   // Set the initial camera position here
   useEffect(() => {
@@ -68,36 +67,24 @@ const FreeFlyCamera = () => {
     }
   };
 
-  // Touch event for swipe handling
+  // Handle touch events for mobile devices
   const handleTouchStart = (event) => {
-    if (event.touches.length === 1) {
-      touchStart.current = { x: event.touches[0].clientX, y: event.touches[0].clientY };
-    }
+    touchStart.current = { x: event.touches[0].clientX, y: event.touches[0].clientY };
   };
 
   const handleTouchMove = (event) => {
     if (event.touches.length === 1) {
       const deltaX = event.touches[0].clientX - touchStart.current.x;
       const deltaY = event.touches[0].clientY - touchStart.current.y;
-
-      // Set the mouse delta for rotation (same as before)
       mouseDelta.current.x = deltaX;
       mouseDelta.current.y = deltaY;
-
-      // Update touch start position for continuous movement
       touchStart.current = { x: event.touches[0].clientX, y: event.touches[0].clientY };
-
-      // Add movement for forward/backward (based on vertical swipe direction)
-      if (Math.abs(deltaY) > Math.abs(deltaX)) {
-        if (deltaY < 0) {
-          // Swipe up - move forward
-          camera.position.z -= speed; // Move the camera forward (toward the scene)
-        } else if (deltaY > 0) {
-          // Swipe down - move backward
-          camera.position.z += speed; // Move the camera backward (away from the scene)
-        }
-      }
     }
+  };
+
+  const handleTouchEnd = () => {
+    mouseDelta.current.x = 0;
+    mouseDelta.current.y = 0;
   };
 
   useEffect(() => {
@@ -106,8 +93,11 @@ const FreeFlyCamera = () => {
     window.addEventListener("mousemove", handleMouseMove);
     window.addEventListener("mousedown", handleMouseDown);
     window.addEventListener("mouseup", handleMouseUp);
+
+    // Add touch event listeners
     window.addEventListener("touchstart", handleTouchStart);
     window.addEventListener("touchmove", handleTouchMove);
+    window.addEventListener("touchend", handleTouchEnd);
 
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
@@ -115,8 +105,11 @@ const FreeFlyCamera = () => {
       window.removeEventListener("mousemove", handleMouseMove);
       window.removeEventListener("mousedown", handleMouseDown);
       window.removeEventListener("mouseup", handleMouseUp);
+
+      // Remove touch event listeners
       window.removeEventListener("touchstart", handleTouchStart);
       window.removeEventListener("touchmove", handleTouchMove);
+      window.removeEventListener("touchend", handleTouchEnd);
     };
   }, []);
 
@@ -147,10 +140,9 @@ const FreeFlyCamera = () => {
       camera.position.y -= speed;
     }
 
-    // Fixing inverted camera movement
-    if (isMousePressed.current) {
-      camera.rotation.y += mouseDelta.current.x * rotationSpeed; // Fix inverted movement for horizontal
-      camera.rotation.x += mouseDelta.current.y * rotationSpeed; // Fix inverted movement for vertical
+    if (isMousePressed.current || mouseDelta.current.x !== 0 || mouseDelta.current.y !== 0) {
+      camera.rotation.y -= mouseDelta.current.x * rotationSpeed;
+      camera.rotation.x -= mouseDelta.current.y * rotationSpeed;
       camera.rotation.x = Math.max(-Math.PI / 2, Math.min(Math.PI / 2, camera.rotation.x));
     }
 
@@ -160,6 +152,7 @@ const FreeFlyCamera = () => {
 
   return null;
 };
+
 
 const App = () => {
   const audioRef = useRef(null);
