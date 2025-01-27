@@ -26,13 +26,13 @@ const LoadingAnimation = () => {
   );
 };
 
-// FreeFlyCamera component for navigation
 const FreeFlyCamera = () => {
   const { camera } = useThree();
   const speed = 0.04;
   const rotationSpeed = 0.002;
   const keysPressed = useRef({});
   const mouseDelta = useRef({ x: 0, y: 0 });
+  const touchStart = useRef({ x: 0, y: 0 }); // Store initial touch position
   const isMousePressed = useRef(false);
 
   // Set the initial camera position here
@@ -67,6 +67,26 @@ const FreeFlyCamera = () => {
     }
   };
 
+  // Handle touch events for mobile devices
+  const handleTouchStart = (event) => {
+    touchStart.current = { x: event.touches[0].clientX, y: event.touches[0].clientY };
+  };
+
+  const handleTouchMove = (event) => {
+    if (event.touches.length === 1) {
+      const deltaX = event.touches[0].clientX - touchStart.current.x;
+      const deltaY = event.touches[0].clientY - touchStart.current.y;
+      mouseDelta.current.x = deltaX;
+      mouseDelta.current.y = deltaY;
+      touchStart.current = { x: event.touches[0].clientX, y: event.touches[0].clientY };
+    }
+  };
+
+  const handleTouchEnd = () => {
+    mouseDelta.current.x = 0;
+    mouseDelta.current.y = 0;
+  };
+
   useEffect(() => {
     window.addEventListener("keydown", handleKeyDown);
     window.addEventListener("keyup", handleKeyUp);
@@ -74,12 +94,22 @@ const FreeFlyCamera = () => {
     window.addEventListener("mousedown", handleMouseDown);
     window.addEventListener("mouseup", handleMouseUp);
 
+    // Add touch event listeners
+    window.addEventListener("touchstart", handleTouchStart);
+    window.addEventListener("touchmove", handleTouchMove);
+    window.addEventListener("touchend", handleTouchEnd);
+
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
       window.removeEventListener("keyup", handleKeyUp);
       window.removeEventListener("mousemove", handleMouseMove);
       window.removeEventListener("mousedown", handleMouseDown);
       window.removeEventListener("mouseup", handleMouseUp);
+
+      // Remove touch event listeners
+      window.removeEventListener("touchstart", handleTouchStart);
+      window.removeEventListener("touchmove", handleTouchMove);
+      window.removeEventListener("touchend", handleTouchEnd);
     };
   }, []);
 
@@ -110,7 +140,7 @@ const FreeFlyCamera = () => {
       camera.position.y -= speed;
     }
 
-    if (isMousePressed.current) {
+    if (isMousePressed.current || mouseDelta.current.x !== 0 || mouseDelta.current.y !== 0) {
       camera.rotation.y -= mouseDelta.current.x * rotationSpeed;
       camera.rotation.x -= mouseDelta.current.y * rotationSpeed;
       camera.rotation.x = Math.max(-Math.PI / 2, Math.min(Math.PI / 2, camera.rotation.x));
@@ -122,6 +152,7 @@ const FreeFlyCamera = () => {
 
   return null;
 };
+
 
 const App = () => {
   const audioRef = useRef(null);
