@@ -2,7 +2,7 @@ import React, { useRef } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { useLoader } from "@react-three/fiber";
 import * as THREE from "three";
-import './SaturnPage.css';
+import "./SaturnPage.css"; // Import the CSS file
 
 const Saturn = ({ texture, ringTexture }) => {
   const saturnRef = useRef();
@@ -69,6 +69,7 @@ const SaturnPage = () => {
             src="https://docs.google.com/document/d/1h5xFHIHebF2bI1Uy37DRV_YRYVUEyVcpSiD3D0tL2y8/edit?usp=sharing"
             className="doc-iframe"
             frameBorder="0"
+            title="Saturn Document"
           />
         </div>
       </div>

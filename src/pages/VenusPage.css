@@ -1,0 +1,28 @@
+/* For screens smaller than 768px (mobile devices) */
+@media (max-width: 767px) {
+    .planet-3d {
+      display: none; /* Hide the planet */
+    }
+  
+    .server-info {
+      width: 100% !important; /* Full width for the text */
+      height: 100vh !important; /* Full height */
+    }
+  }
+  
+  /* For screens larger than 768px (PCs) */
+  @media (min-width: 768px) {
+    .venus-page {
+      flex-direction: row !important; /* Side-by-side layout */
+    }
+  
+    .planet-3d {
+      display: block !important; /* Show the planet */
+      width: 50% !important; /* Half the screen for the planet */
+      height: 100vh !important; /* Full height */
+    }
+  
+    .server-info {
+      width: 50% !important; /* Half the screen for the text */
+    }
+  }

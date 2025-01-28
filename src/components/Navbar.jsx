@@ -5,51 +5,45 @@ import '../components/Navbar.css';
 const Navbar = () => {
   const [dropdownVisible, setDropdownVisible] = useState(false);
 
-  // Toggle dropdown visibility on click
   const toggleDropdown = () => {
-    setDropdownVisible((prev) => !prev);  // Toggle state value
+    setDropdownVisible((prev) => !prev);
   };
 
-  // Close the dropdown if clicked outside
   const handleClickOutside = (e) => {
-    // Close dropdown only if clicked outside of the dropdown button or menu
     if (!e.target.closest('.relative')) {
       setDropdownVisible(false);
     }
   };
 
   useEffect(() => {
-    // Add event listener to handle click outside
     document.addEventListener('click', handleClickOutside);
     return () => {
-      // Cleanup the event listener
       document.removeEventListener('click', handleClickOutside);
     };
   }, [dropdownVisible]);
 
   return (
     <nav className="absolute top-0 left-0 right-0 flex justify-between items-center py-4 px-8 z-10">
-      {/* Left side: Logo and Title */}
+      {/* Left: Logo and Title */}
       <div className="flex items-center space-x-2">
-        <Link to="/" className="flex items-center space-x-2"> {/* Link to homepage */}
+        <Link to="/" className="flex items-center space-x-2">
           <img src="Logo.png" alt="Virtus Central Logo" className="w-10 h-10" />
-          <h1 className="text-white text-3xl font-bold title">Virtus Central</h1>
+          {/* Title is hidden on small screens */}
+          <h1 className="text-3xl font-bold title text-white hidden sm:block">Virtus Central</h1>
         </Link>
       </div>
 
-      {/* Right side: Dropdown Menu */}
+      {/* Right: Dropdown */}
       <div className="relative">
-        <button 
+        <button
           className="text-white bg-transparent border border-white py-2 px-4 rounded-lg focus:outline-none planet-button"
-          onClick={toggleDropdown}  // Toggle dropdown on click
+          onClick={toggleDropdown}
         >
           Planets
         </button>
-        
-        {/* Show the dropdown based on the state */}
+
         {dropdownVisible && (
           <div className="dropdown-content absolute bg-gray-800 text-white py-2 px-4 rounded-lg mt-2">
-            {/* Dropdown links to different planet pages */}
             <Link to="/MercuryPage" className="block py-1">Mercury</Link>
             <Link to="/VenusPage" className="block py-1">Venus</Link>
             <Link to="/EarthPage" className="block py-1">Earth</Link>

@@ -61,5 +61,10 @@
     color: #fff; /* Keep text color white on hover */
 }
 
-  
+@media (max-width: 640px) {
+  .title {
+    display: none; /* Explicitly hide the title */
+  }
+}
+
   
