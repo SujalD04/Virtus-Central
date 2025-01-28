@@ -37,7 +37,7 @@ const FreeFlyCamera = () => {
   const lastTouchDistance = useRef(0);
 
   useEffect(() => {
-    camera.position.set(-1, 0, 6);
+    camera.position.set(-0.5, 0, 10);
   }, [camera]);
 
   const handleKeyDown = (event) => {
