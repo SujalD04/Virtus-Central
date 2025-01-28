@@ -6,7 +6,7 @@ const Neptune = ({ highlight, onClick, onPointerOver, onPointerOut }) => {
   const neptuneRef = useRef();
   const [emissiveColor, setEmissiveColor] = useState(new THREE.Color(0x000000)); // Default emissive color
 
-  const texture = useLoader(THREE.TextureLoader, 'neptune.jpg');
+  const texture = useLoader(THREE.TextureLoader, 'neptune.webp');
 
   // Rotate Neptune while keeping the axial tilt
   useFrame(() => {

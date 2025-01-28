@@ -6,8 +6,8 @@ const Saturn = ({ highlight, onClick, onPointerOver, onPointerOut }) => {
   const saturnRef = useRef();
   const ringRef = useRef();
 
-  const texture = useLoader(THREE.TextureLoader, 'saturn.jpg');
-  const ringTexture = useLoader(THREE.TextureLoader, 'saturn_ring.jpg');
+  const texture = useLoader(THREE.TextureLoader, 'saturn.webp');
+  const ringTexture = useLoader(THREE.TextureLoader, 'saturn_ring.webp');
 
   const [planetEmissiveColor, setPlanetEmissiveColor] = useState(new THREE.Color(0x000000)); // Default emissive color for planet
   const [ringEmissiveColor, setRingEmissiveColor] = useState(new THREE.Color(0x000000)); // Default emissive color for rings

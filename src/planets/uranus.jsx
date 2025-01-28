@@ -6,7 +6,7 @@ const Uranus = ({ highlight, onClick, onPointerOver, onPointerOut }) => {
   const uranusRef = useRef();
   const [emissiveColor, setEmissiveColor] = useState(new THREE.Color(0x000000)); // Default emissive color
 
-  const texture = useLoader(THREE.TextureLoader, 'uranus.jpg');
+  const texture = useLoader(THREE.TextureLoader, 'uranus.webp');
 
   // Rotate Uranus while keeping the axial tilt
   useFrame(() => {

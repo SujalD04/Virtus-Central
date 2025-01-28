@@ -7,7 +7,7 @@ const Sun = () => {
   const { viewport } = useThree(); // Access viewport for responsive scaling
 
   // Load the texture (optional)
-  const texture = useLoader(THREE.TextureLoader, 'sun.jpg');
+  const texture = useLoader(THREE.TextureLoader, 'sun.webp');
 
   // Rotate the Sun
   useFrame(() => {

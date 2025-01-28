@@ -4,7 +4,7 @@ import * as THREE from "three";
 
 const Mercury = ({ highlight, onClick, onPointerOver, onPointerOut }) => {
   const mercuryRef = useRef();
-  const texture = useLoader(THREE.TextureLoader, 'mercury.jpg'); // Load Mercury's texture
+  const texture = useLoader(THREE.TextureLoader, 'mercury.webp'); // Load Mercury's texture
 
   // Rotate Mercury on its axis
   useFrame(() => {

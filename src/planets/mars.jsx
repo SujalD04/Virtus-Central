@@ -4,7 +4,7 @@ import * as THREE from "three";
 
 const Mars = ({ highlight, onClick, onPointerOver, onPointerOut }) => {
   const marsRef = useRef();
-  const texture = useLoader(THREE.TextureLoader, 'mars.jpg'); // Load Mars texture
+  const texture = useLoader(THREE.TextureLoader, 'mars.webp'); // Load Mars texture
 
   // Rotate Mars on its axis
   useFrame(() => {

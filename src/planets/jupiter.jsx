@@ -4,7 +4,7 @@ import * as THREE from "three";
 
 const Jupiter = ({ highlight, onClick, onPointerOver, onPointerOut }) => {
   const jupiterRef = useRef();
-  const texture = useLoader(THREE.TextureLoader, 'jupiter.jpg'); // Load Jupiter's texture
+  const texture = useLoader(THREE.TextureLoader, 'jupiter.webp'); // Load Jupiter's texture
 
   // Rotate Jupiter on its axis
   useFrame(() => {

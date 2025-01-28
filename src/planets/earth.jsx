@@ -4,7 +4,7 @@ import * as THREE from "three";
 
 const Earth = ({ highlight, onClick, onPointerOver, onPointerOut }) => {
   const earthRef = useRef();
-  const texture = useLoader(THREE.TextureLoader, 'earth.jpg'); // Load Earth texture
+  const texture = useLoader(THREE.TextureLoader, 'earth.webp'); // Load Earth texture
 
   // Rotate Earth on its axis
   useFrame(() => {

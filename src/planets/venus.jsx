@@ -4,7 +4,7 @@ import * as THREE from "three";
 
 const Venus = ({ highlight, onClick, onPointerOver, onPointerOut }) => {
   const venusRef = useRef();
-  const texture = useLoader(THREE.TextureLoader, 'venus.jpg');
+  const texture = useLoader(THREE.TextureLoader, 'venus.webp');
   const [emissiveColor, setEmissiveColor] = useState(new THREE.Color(0x000000)); // Default emissive color is black
 
   // Rotate Venus on its axis
