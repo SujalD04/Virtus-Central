@@ -20,11 +20,20 @@ import * as THREE from "three";
 // Loading animation component
 const LoadingAnimation = () => {
   return (
-    <div className="absolute inset-0 flex items-center justify-center z-50 bg-black bg-opacity-60">
-      <div className="w-16 h-16 border-4 border-t-4 border-white rounded-full animate-spin"></div>
+    <div className="absolute inset-0 flex items-center justify-center z-50 bg-black bg-opacity-70">
+      <div className="relative w-20 h-20">
+        {/* Outer glowing ring */}
+        <div className="absolute inset-0 rounded-full border-4 border-t-transparent border-b-transparent border-white animate-spin"></div>
+        {/* Inner glowing core */}
+        <div className="absolute inset-4 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 animate-pulse"></div>
+      </div>
+      <p className="mt-4 pl-3 text-white text-lg font-semibold animate-bounce">
+        Loading...
+      </p>
     </div>
   );
 };
+
 
 const FreeFlyCamera = () => {
   const { camera } = useThree();
