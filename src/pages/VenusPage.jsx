@@ -76,7 +76,7 @@ const VenusPage = () => {
         >
           <h1>About The Server</h1>
           <hr />
-          <p className="text-xs">
+          <p className="text-sm">
             Founded by 2 guys, Virtus Central is a dynamic hub for enthusiasts of all kinds, where gamers, techies, and media lovers unite to explore a wide range of interests.
             Whether you're into the latest video games, cutting-edge technology, or diving into movies, anime, coding, books, art, and sports, there's a place for you here.
              With an inclusive and friendly environment, you can connect with like-minded individuals, share your passions, and be
