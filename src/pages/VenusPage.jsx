@@ -31,7 +31,7 @@ const Venus = ({ texture }) => {
 };
 
 const VenusPage = () => {
-  const texture = useLoader(THREE.TextureLoader, 'venus.jpg');
+  const texture = useLoader(THREE.TextureLoader, 'venus.webp');
 
   return (
     <div className="venus-page" style={{ display: "flex", flexDirection: "column" }}>

@@ -31,7 +31,7 @@ const Jupiter = ({ texture }) => {
 };
 
 const JupiterPage = () => {
-  const texture = useLoader(THREE.TextureLoader, 'jupiter.jpg');
+  const texture = useLoader(THREE.TextureLoader, 'jupiter.webp');
 
   return (
     <div className="jupiter-page" style={{ display: "flex" }}>

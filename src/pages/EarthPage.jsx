@@ -31,7 +31,7 @@ const Earth = ({ texture }) => {
 };
 
 const EarthPage = () => {
-  const texture = useLoader(THREE.TextureLoader, 'earth.jpg');
+  const texture = useLoader(THREE.TextureLoader, 'earth.webp');
 
   return (
     <div className="earth-page" style={{ display: "flex", height: "100vh" }}>

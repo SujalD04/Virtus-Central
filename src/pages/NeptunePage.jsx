@@ -32,7 +32,7 @@ const Neptune = ({ texture }) => {
 
 const NeptunePage = () => {
   // Load Neptune's texture
-  const texture = useLoader(THREE.TextureLoader, 'neptune.jpg');
+  const texture = useLoader(THREE.TextureLoader, 'neptune.webp');
 
   return (
     <div className="neptune-page" style={{ display: "flex" }}>

@@ -30,7 +30,7 @@ const Mars = ({ texture }) => {
 };
 
 const MarsPage = () => {
-  const texture = useLoader(THREE.TextureLoader, 'mars.jpg');
+  const texture = useLoader(THREE.TextureLoader, 'mars.webp');
 
   return (
     <div className="mars-page" style={{ display: "flex", height: "100vh" }}>

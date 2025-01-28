@@ -32,7 +32,7 @@ const Mercury = ({ texture }) => {
 
 const MercuryPage = () => {
   // Load Mercury's texture
-  const texture = useLoader(THREE.TextureLoader, 'mercury.jpg');
+  const texture = useLoader(THREE.TextureLoader, 'mercury.webp');
   
   // Handle click events for Mercury
   const handleClick = () => {

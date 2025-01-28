@@ -47,8 +47,8 @@ const Saturn = ({ texture, ringTexture }) => {
 
 const SaturnPage = () => {
   // Load the textures
-  const texture = useLoader(THREE.TextureLoader, "saturn.jpg");
-  const ringTexture = useLoader(THREE.TextureLoader, "saturn_ring.jpg");
+  const texture = useLoader(THREE.TextureLoader, "saturn.webp");
+  const ringTexture = useLoader(THREE.TextureLoader, "saturn_ring.webp");
 
   return (
     <div className="saturn-page">

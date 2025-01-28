@@ -31,7 +31,7 @@ const Uranus = ({ texture }) => {
 };
 
 const UranusPage = () => {
-  const texture = useLoader(THREE.TextureLoader, 'uranus.jpg');
+  const texture = useLoader(THREE.TextureLoader, 'uranus.webp');
   
   // State for form inputs
   const [name, setName] = useState("");
