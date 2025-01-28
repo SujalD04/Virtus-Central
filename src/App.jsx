@@ -32,10 +32,10 @@ const FreeFlyCamera = () => {
   const rotationSpeed = 0.002;
   const keysPressed = useRef({});
   const mouseDelta = useRef({ x: 0, y: 0 });
-  const touchStart = useRef({ x: 0, y: 0 }); // Store initial touch position
-  const isMousePressed = useRef(false);
+  const isMouseDown = useRef(false); // Track mouse button state
+  const touchStart = useRef([]);
+  const lastTouchDistance = useRef(0);
 
-  // Set the initial camera position here
   useEffect(() => {
     camera.position.set(-1, 0, 6);
   }, [camera]);
@@ -49,42 +49,61 @@ const FreeFlyCamera = () => {
   };
 
   const handleMouseMove = (event) => {
-    if (isMousePressed.current) {
+    if (isMouseDown.current) {
       mouseDelta.current.x = event.movementX;
       mouseDelta.current.y = event.movementY;
     }
   };
 
-  const handleMouseDown = (event) => {
-    if (event.button === 0) {
-      isMousePressed.current = true;
-    }
+  const handleMouseDown = () => {
+    isMouseDown.current = true;
   };
 
-  const handleMouseUp = (event) => {
-    if (event.button === 0) {
-      isMousePressed.current = false;
-    }
+  const handleMouseUp = () => {
+    isMouseDown.current = false;
   };
 
-  // Handle touch events for mobile devices
   const handleTouchStart = (event) => {
-    touchStart.current = { x: event.touches[0].clientX, y: event.touches[0].clientY };
+    touchStart.current = Array.from(event.touches).map((t) => ({
+      x: t.clientX,
+      y: t.clientY,
+    }));
+
+    if (event.touches.length === 2) {
+      const dx = event.touches[0].clientX - event.touches[1].clientX;
+      const dy = event.touches[0].clientY - event.touches[1].clientY;
+      lastTouchDistance.current = Math.sqrt(dx * dx + dy * dy);
+    }
   };
 
   const handleTouchMove = (event) => {
     if (event.touches.length === 1) {
-      const deltaX = event.touches[0].clientX - touchStart.current.x;
-      const deltaY = event.touches[0].clientY - touchStart.current.y;
-      mouseDelta.current.x = deltaX;
+      const deltaX = event.touches[0].clientX - touchStart.current[0].x;
+      const deltaY = event.touches[0].clientY - touchStart.current[0].y;
+
+      mouseDelta.current.x = -deltaX;
       mouseDelta.current.y = deltaY;
-      touchStart.current = { x: event.touches[0].clientX, y: event.touches[0].clientY };
+
+      touchStart.current[0] = { x: event.touches[0].clientX, y: event.touches[0].clientY };
+    } else if (event.touches.length === 2) {
+      const dx = event.touches[0].clientX - event.touches[1].clientX;
+      const dy = event.touches[0].clientY - event.touches[1].clientY;
+      const newDistance = Math.sqrt(dx * dx + dy * dy);
+
+      const zoomSpeed = 0.01;
+      const zoomDelta = (newDistance - lastTouchDistance.current) * zoomSpeed;
+
+      camera.getWorldDirection(mouseDelta.current);
+      camera.position.addScaledVector(mouseDelta.current, zoomDelta);
+
+      lastTouchDistance.current = newDistance;
     }
   };
 
   const handleTouchEnd = () => {
     mouseDelta.current.x = 0;
     mouseDelta.current.y = 0;
+    lastTouchDistance.current = 0;
   };
 
   useEffect(() => {
@@ -94,7 +113,6 @@ const FreeFlyCamera = () => {
     window.addEventListener("mousedown", handleMouseDown);
     window.addEventListener("mouseup", handleMouseUp);
 
-    // Add touch event listeners
     window.addEventListener("touchstart", handleTouchStart);
     window.addEventListener("touchmove", handleTouchMove);
     window.addEventListener("touchend", handleTouchEnd);
@@ -106,7 +124,6 @@ const FreeFlyCamera = () => {
       window.removeEventListener("mousedown", handleMouseDown);
       window.removeEventListener("mouseup", handleMouseUp);
 
-      // Remove touch event listeners
       window.removeEventListener("touchstart", handleTouchStart);
       window.removeEventListener("touchmove", handleTouchMove);
       window.removeEventListener("touchend", handleTouchEnd);
@@ -140,7 +157,7 @@ const FreeFlyCamera = () => {
       camera.position.y -= speed;
     }
 
-    if (isMousePressed.current || mouseDelta.current.x !== 0 || mouseDelta.current.y !== 0) {
+    if (mouseDelta.current.x !== 0 || mouseDelta.current.y !== 0) {
       camera.rotation.y -= mouseDelta.current.x * rotationSpeed;
       camera.rotation.x -= mouseDelta.current.y * rotationSpeed;
       camera.rotation.x = Math.max(-Math.PI / 2, Math.min(Math.PI / 2, camera.rotation.x));
