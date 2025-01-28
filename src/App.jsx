@@ -16,6 +16,7 @@ import UranusPage from "./pages/UranusPage";
 import NeptunePage from "./pages/NeptunePage";
 import "../src/App.css";
 import * as THREE from "three";
+import { Analytics } from "@vercel/analytics/react"
 
 // Loading animation component
 const LoadingAnimation = () => {
@@ -208,6 +209,10 @@ const App = () => {
   return (
     <Router>
       <div className="relative min-h-screen bg-black overflow-hidden">
+
+        {/*Vercel Analytics*/}
+        <Analytics />
+        
         {/* Navbar */}
         <Navbar />
 
