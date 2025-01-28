@@ -27,7 +27,7 @@ const Navbar = () => {
       {/* Left: Logo and Title */}
       <div className="flex items-center space-x-2">
         <Link to="/" className="flex items-center space-x-2">
-          <img src="Logo.png" alt="Virtus Central Logo" className="w-10 h-10" />
+          <img src="vcLogo.png" alt="Virtus Central Logo" className="w-10 h-10" />
           {/* Title is hidden on small screens */}
           <h1 className="text-3xl font-bold title text-white hidden sm:block">Virtus Central</h1>
         </Link>
